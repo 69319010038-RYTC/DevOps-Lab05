@@ -156,7 +156,15 @@ function resizePieces() {
   const cellHeight = board.clientHeight / rows;
   const tab = Math.min(cellWidth, cellHeight) * TAB_RATIO;
   const trayColumns = getComputedStyle(tray).gridTemplateColumns.split(" ").length;
+  const trayRows = Math.ceil(pieceCount / trayColumns);
+  const trayStyle = getComputedStyle(tray);
+  const trayGap = Number.parseFloat(trayStyle.rowGap);
+  const trayPadding =
+    Number.parseFloat(trayStyle.paddingTop) + Number.parseFloat(trayStyle.paddingBottom);
+  tray.style.gridTemplateRows = `repeat(${trayRows}, minmax(0, 1fr))`;
   const traySlotWidth = tray.clientWidth / trayColumns;
+  const traySlotHeight =
+    (tray.clientHeight - trayPadding - trayGap * (trayRows - 1)) / trayRows;
 
   for (const piece of pieces) {
     const svg = piece.element;
@@ -184,7 +192,11 @@ function resizePieces() {
       svg.style.height = `${height}px`;
       setSvgPosition(svg, "absolute", piece.column * cellWidth - tab, piece.row * cellHeight - tab);
     } else if (svg.parentElement === piece.slot) {
-      piece.previewScale = Math.min(0.7, (traySlotWidth - 6) / width);
+      piece.previewScale = Math.min(
+        0.7,
+        (traySlotWidth - 6) / width,
+        (traySlotHeight - 4) / height,
+      );
       svg.style.width = `${width * piece.previewScale}px`;
       svg.style.height = `${height * piece.previewScale}px`;
     } else if (svg.parentElement === gameArea) {
