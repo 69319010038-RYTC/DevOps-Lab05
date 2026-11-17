@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#fbf4ff">
+    <meta name="description" content="เกมจิ๊กซอว์รถสปอร์ต ประกอบภาพให้ครบ 20 ชิ้น">
+    <title>Jigsaw Drive — เกมต่อจิ๊กซอว์</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <main class="page-shell">
+      <header class="page-header">
+        <a class="brand" href="./" aria-label="Jigsaw Drive หน้าแรก">
+          <span class="brand-mark" aria-hidden="true">J</span>
+          <span>Jigsaw <span class="brand-accent">Drive</span></span>
+        </a>
+        <div class="header-actions">
+          <p class="header-note">ช่วงเวลาพักสั้น ๆ ที่เติมความสนุกได้เต็มถัง</p>
+          <button class="music-button" id="music-button" type="button" aria-pressed="false">
+            <span aria-hidden="true">♫</span>
+            <span id="music-label">เปิดเพลง</span>
+          </button>
+        </div>
+      </header>
+
+      <section class="game-card" aria-labelledby="game-title">
+        <div class="game-heading">
+          <div>
+            <p class="eyebrow">PUZZLE 01 · SPORTS CAR</p>
+            <h1 id="game-title">ต่อภาพให้ครบทุกชิ้น</h1>
+            <p class="subtitle">ลากชิ้นส่วนไปวางในช่องที่ตรงกับภาพจาง ๆ</p>
+          </div>
+          <div class="difficulty-picker" role="group" aria-label="เลือกระดับความยาก">
+            <button class="difficulty-button is-active" id="easy-button" data-difficulty="easy" type="button" aria-pressed="true">
+              ง่าย · 20 ชิ้น
+            </button>
+            <button class="difficulty-button" id="hard-button" data-difficulty="hard" type="button" aria-pressed="false">
+              ยาก · 40 ชิ้น
+            </button>
+          </div>
+        </div>
+
+        <div class="stats-row" aria-label="สถานะเกม">
+          <div class="stat">
+            <span class="stat-label">ประกอบแล้ว</span>
+            <span class="stat-value"><span id="placed-count">0</span><span class="stat-total"> / <span id="piece-total">20</span></span></span>
+          </div>
+          <div class="progress-track" role="progressbar" aria-label="ความคืบหน้าของเกม" aria-valuemin="0" aria-valuemax="20" aria-valuenow="0">
+            <span class="progress-fill" id="progress-fill"></span>
+          </div>
+          <div class="stat stat-time">
+            <span class="stat-label">เวลาที่ใช้</span>
+            <span class="stat-value" id="timer">00:00</span>
+          </div>
+        </div>
+
+        <div class="game-area">
+          <div class="board-wrap">
+            <div class="board-label">
+              <span>ภาพปริศนา</span>
+              <span class="board-size" id="board-size">5 × 4 ชิ้น</span>
+            </div>
+            <div class="board" id="board" aria-label="กระดานต่อจิ๊กซอว์">
+              <div class="board-grid" id="board-grid" aria-hidden="true"></div>
+            </div>
+          </div>
+
+          <section class="tray-wrap" aria-labelledby="tray-title">
+            <div class="tray-heading">
+              <div>
+                <h2 id="tray-title">ชิ้นส่วน</h2>
+                <p>วางแต่ละชิ้นในช่องที่ตรงกับภาพจาง ๆ</p>
+              </div>
+              <button class="button button-reset" id="reset-button" type="button">
+                <span aria-hidden="true">↻</span>
+                เริ่มใหม่
+              </button>
+            </div>
+            <div class="piece-tray" id="piece-tray" aria-label="ถาดชิ้นส่วนจิ๊กซอว์"></div>
+          </section>
+        </div>
+
+        <p class="game-message" id="game-message" aria-live="polite">กำลังเตรียมชิ้นส่วน...</p>
+        <div class="win-banner" id="win-banner" hidden>
+          <span class="win-icon" aria-hidden="true">✓</span>
+          <div>
+            <strong>ประกอบภาพสำเร็จ!</strong>
+            <span>ยอดเยี่ยมมาก ใช้เวลา <span id="final-time">00:00</span></span>
+          </div>
+        </div>
+      </section>
+
+      <footer class="page-footer">ผ่อนคลายไปทีละชิ้น แล้วภาพสวย ๆ จะค่อย ๆ ปรากฏ</footer>
+    </main>
+
+    <audio id="background-audio" src="background-music.mp3" loop preload="none"></audio>
+    <audio id="drop-audio" src="jigsaw-drop.mp3" preload="auto"></audio>
+  </body>
+</html>
